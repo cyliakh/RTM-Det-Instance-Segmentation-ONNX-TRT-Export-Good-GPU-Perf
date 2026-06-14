@@ -1,14 +1,14 @@
-# MMDeploy (Modified Version)
+# MMDeploy (Modified Version for RTMDet Instance Segmentation)
 
-This repository is based on **MMDeploy** and includes several modifications focused on improving deployment performance and ONNX Runtime compatibility.
+This repository is based on **MMDeploy** and includes several modifications specifically for **RTMDet Instance Segmentation** deployment with **TensorRT** and **ONNX Runtime**.
 
 ## Changes in This Fork
 
-### 1. TensorRT / ONNX GPU Performance Fix
+### 1. RTMDet Instance Segmentation TensorRT / ONNX Performance Fix
 
-A common issue when exporting models to **TensorRT** or **ONNX** is that GPU inference performance does not improve significantly compared to the original PyTorch model, resulting in little or no FPS gain.
+A common issue when exporting **RTMDet Instance Segmentation** models to **TensorRT** or **ONNX** is that GPU inference performance does not improve significantly compared to the original PyTorch model, resulting in little or no FPS gain.
 
-This fork includes modifications in the deployment head to address this issue and improve GPU utilization and inference throughput after export.
+This fork includes modifications in the RTMDet instance segmentation deployment head to address this issue and improve GPU utilization and inference throughput after export.
 
 ### 2. FP16 Conversion Fix for ONNX Runtime
 
@@ -26,7 +26,7 @@ The implementation skips operators from the section:
 # --- Common list of ops that often cause issues with FP16 conversion ---
 ```
 
-which helps avoid conversion failures and runtime issues commonly encountered when converting ONNX models to FP16.
+which helps avoid conversion failures and runtime issues commonly encountered when converting RTMDet Instance Segmentation ONNX models to FP16.
 
 ### 3. ONNX Runtime Inference Example
 
@@ -38,12 +38,24 @@ onnx.py
 
 The script demonstrates how to:
 
-- Load an exported ONNX model
+- Load an exported RTMDet Instance Segmentation ONNX model
 - Run inference with ONNX Runtime
-- Use CUDA Execution Provider
+- Use the CUDA Execution Provider
 - Measure inference performance
+- Perform mask and bounding box inference
 
 ---
+
+## Tested Use Case
+
+These modifications were developed and tested for:
+
+- RTMDet Instance Segmentation
+- ONNX Runtime (CUDA)
+- TensorRT
+- FP16 deployment
+
+Other architectures may also benefit from the changes, but they were primarily designed for RTMDet Instance Segmentation.
 
 ## About MMDeploy
 
@@ -55,18 +67,6 @@ MMDeploy is the OpenMMLab deployment framework for exporting and deploying model
 - OpenVINO
 - TorchScript
 - PPLNN
-
-### Supported OpenMMLab Projects
-
-- MMDetection
-- MMYOLO
-- MMSegmentation
-- MMPose
-- MMOCR
-- MMPretrain
-- MMRotate
-- MMAction2
-- MMDetection3D
 
 ## Documentation
 
